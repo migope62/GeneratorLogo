@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+  --background-color: #0D141F;
+  --link-color: rgba(255, 255, 255, 0.7);
+  --container-color: rgba(255, 255, 255, 0.05);
+  --button-color: #003362;
+  --button-hover-color: #205D9E;
+  --button-text-color: rgba(255, 255, 255, 0.7);
+  --text-color:rgba(255, 255, 255, 0.95);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}

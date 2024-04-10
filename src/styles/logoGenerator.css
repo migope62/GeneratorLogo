@@ -13,8 +13,8 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column;
-    width: 20%;
-    height: 70vh;
+    width: 25%;
+    height: 80vh;
     background-color: var(--container-color);
     border-radius: 0.2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -42,9 +42,6 @@ max-width:20rem;
 
 }
 
-
-
-
 .container button {
     margin-bottom: 0.5rem;
     padding: 0.5rem;
@@ -58,10 +55,10 @@ max-width:20rem;
 .container button:hover {
     background-color: var(--button-hover-color);
 }
-/* Formes */
+
 .container2 {
     margin: 0 auto;
-    width: 75%;
+    width: 70%;
     display: flex;
     align-items: center;
     border: 0.2rem solid var(--container-color);
@@ -92,7 +89,7 @@ max-width:20rem;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
-/* Logo Généré */
+
 .generated-logo {
     margin: 0 auto;
     display: flex;
@@ -107,28 +104,38 @@ max-width:20rem;
     max-height: 5rem;
 }
 
-/* Responsive */
-@media only screen and (max-width: 600px) {
-    h1 {
-        font-size: 1.2rem;
-    }
-
+@media (max-width: 1037px) {
     .container {
-        max-width: 22rem;
-        max-height: 25rem;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        width: 80%;
+        padding: 2rem;
+        height: 120vh;
     }
 
-    .ColorPicker,
-    .FontSelector {
-        font-size: 0.9rem;
+    .container-wrapper {
+        flex-direction: column;
     }
 
-    .container input[type="text"] {
-        font-size: 0.9rem;
+    .container2 {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
+}
 
-    .container button {
-        font-size: 0.9rem;
-        margin-top: 20px;
+
+@media (max-width: 750px) {
+    .container {
+        font-size: 0.7rem;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .container {
+        font-size: 0.6rem;
     }
 }

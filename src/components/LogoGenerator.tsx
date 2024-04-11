@@ -14,7 +14,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [fontWeight, setFontWeight] = useState<string>('normal');
     const [letterSpacing, setLetterSpacing] = useState<number>(0);
     const [generatedLogo, setGeneratedLogo] = useState<string>('');
-    const [inputText, setInputText] = useState<string>('Votre texte de logo ici');
+    const [inputText, setInputText] = useState<string>('      Votre texte ici');
     const [image, setImage] = useState<string>('');
     const [imageURL, setImageURL] = useState<string>('');
     const [logoWidth, setLogoWidth] = useState<number>(500);

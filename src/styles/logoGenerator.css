@@ -3,10 +3,12 @@ h1 {
     text-align: center;
     font-size: 1.5rem;
 }
+
 .container-wrapper {
     display: flex;
     justify-content: space-between;
 }
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -14,7 +16,7 @@ h1 {
     align-items: flex-start;
     flex-direction: column;
     width: 25%;
-    height: 80vh;
+    max-height: 100%;
     background-color: var(--container-color);
     border-radius: 0.2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,34 +26,44 @@ h1 {
     color: var(--text-color);
 }
 
-.container 
-input[type="text"],
+.container input[type="text"],
 input[type="file"],
 select {
-
-max-width:20rem;
+    margin-bottom: 1rem;
+    max-width: 20rem;
 
 }
-
+.color-input {
+    margin-bottom: 1rem;
+}
 #fontSize,
 #fontWeight,
 #letterSpacing,
 #img,
+#text,
+#form,
+#logoWidth,
+#logoHeight
+{
+    max-width: 5rem;
+    margin-bottom: 1rem;
+}
 #text {
-    max-width: 3rem;
-
+    margin-top: 1rem;
+    max-width: 10rem;
 }
 
 .container button {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     padding: 0.5rem;
     background-color: var(--button-color);
     color: var(--button-text-color);
     border: none;
     border-radius: 0.2rem;
     cursor: pointer;
-    
+
 }
+
 .container button:hover {
     background-color: var(--button-hover-color);
 }

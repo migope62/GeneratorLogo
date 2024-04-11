@@ -127,8 +127,8 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
             <h1>Générez votre logo gratuitement</h1>
             <div className="container-wrapper">
             <div className='container'>
-                    <label htmlFor="img">Choisissez une forme :</label>
-                <select value={logoShape} onChange={(e) => handleLogoShapeChange(e.target.value)}>
+                    <label  htmlFor="img">Choisissez une forme :</label>
+                    <select id="form" value={logoShape} onChange={(e) => handleLogoShapeChange(e.target.value)}>
                     <option value="rectangle">Rectangle</option>
                     <option value="circle">Cercle</option>
                     <option value="triangle">Triangle</option>
@@ -146,12 +146,12 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                 </div>
 
                
-                <input type="text" value={inputText} onChange={handleTextChange} className="equal-height" />
+                <input id="text" type="text" value={inputText} onChange={handleTextChange} className="equal-height" />
                     <div className="FontSelector equal-height">
                         <FontSelector selectedFont={selectedFont} onFontChange={handleFontChange} />
                     </div>
-                    <label htmlFor="img">Télécharger le logo:</label>
-                <input type="file" accept="image/*" onChange={handleImageChange} className="equal-height" />
+                    <label  htmlFor="img">Télécharger le logo:</label>
+                    <input id="img" type="file" accept="image/*" onChange={handleImageChange} className="equal-height" />
 
                 <label htmlFor="fontSize">Taille de police:</label>
                 <input type="number" id="fontSize" value={fontSize} onChange={handleFontSizeChange} className="equal-height" />
@@ -169,7 +169,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                 <label htmlFor="logoWidth">Largeur du logo:</label>
                 <input type="number" id="logoWidth" value={logoWidth} onChange={handleLogoWidthChange} className="equal-height" />
 
-                <label htmlFor="logoHeight">Hauteur du logo:</label>
+                    <label  htmlFor="logoHeight">Hauteur du logo:</label>
                 <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
 
                 <button onClick={generateLogo}>Générer le logo</button>

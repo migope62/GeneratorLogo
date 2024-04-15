@@ -14,11 +14,11 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [fontWeight, setFontWeight] = useState<string>('normal');
     const [letterSpacing, setLetterSpacing] = useState<number>(0);
     const [generatedLogo, setGeneratedLogo] = useState<string>('');
-    const [inputText, setInputText] = useState<string>('      Votre texte ici');
+    const [inputText, setInputText] = useState<string>('Votre texte ici');
     const [image, setImage] = useState<string>('');
     const [imageURL, setImageURL] = useState<string>('');
-    const [logoWidth, setLogoWidth] = useState<number>(500);
-    const [logoHeight, setLogoHeight] = useState<number>(500);
+    const [logoWidth, setLogoWidth] = useState<number>(300);
+    const [logoHeight, setLogoHeight] = useState<number>(300);
     const [logoShape, setLogoShape] = useState<string>('rectangle');
 
     // Fonction pour gérer le changement de couleur de fond sélectionnée
@@ -68,7 +68,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
         setLetterSpacing(Number(event.target.value));
     };
 
-   
+
     // Fonction pour gérer le changement de forme du logo
     const handleLogoShapeChange = (shape: string) => {
         setLogoShape(shape);
@@ -94,7 +94,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
         setImageURL(image);
     };
 
-    
+
 
     // Fonction pour gérer le téléchargement du logo généré
     const downloadImage = () => {
@@ -124,63 +124,49 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
 
     return (
         <>
-            <h1>Générez votre logo gratuitement</h1>
-            <div className="container-wrapper">
-            <div className='container'>
-                    <label  htmlFor="img">Choisissez une forme :</label>
-                    <select id="form" value={logoShape} onChange={(e) => handleLogoShapeChange(e.target.value)}>
-                    <option value="rectangle">Rectangle</option>
-                    <option value="circle">Cercle</option>
-                    <option value="triangle">Triangle</option>
-                    <option value="losange">Losange</option>
-                    <option value="hexagone">Hexagone</option>
-                    <option value="etoile">Etoile</option>
-                </select>
-
-                <div className="ColorPicker equal-height">
+            <div className="bigcontainer">
+                <div className='container'>
                     <CustomColorPicker selectedColor={backgroundColor} onColorChange={handleBackgroundColorChange} />
-                </div>
-
-                <div className="TextColorPicker equal-height">
-                    <CustomColorPicker selectedColor={textColor} onColorChange={handleTextColorChange} />
-                </div>
-
-               
-                <input id="text" type="text" value={inputText} onChange={handleTextChange} className="equal-height" />
-                    <div className="FontSelector equal-height">
-                        <FontSelector selectedFont={selectedFont} onFontChange={handleFontChange} />
-                    </div>
-                    <label  htmlFor="img">Télécharger le logo:</label>
+                    <label htmlFor="form">Choisissez une forme :</label>
+                    <select id="form" value={logoShape} onChange={(e) => handleLogoShapeChange(e.target.value)}>
+                        <option value="rectangle">Rectangle</option>
+                        <option value="circle">Cercle</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="losange">Losange</option>
+                        <option value="hexagone">Hexagone</option>
+                        <option value="etoile">Etoile</option>
+                    </select>
+                    <label htmlFor="img">Importez une image:</label>
                     <input id="img" type="file" accept="image/*" onChange={handleImageChange} className="equal-height" />
+                    <FontSelector selectedFont={selectedFont} onFontChange={handleFontChange} />
 
-                <label htmlFor="fontSize">Taille de police:</label>
-                <input type="number" id="fontSize" value={fontSize} onChange={handleFontSizeChange} className="equal-height" />
-
-                <label htmlFor="fontWeight">Style de police:</label>
-                <select id="fontWeight" value={fontWeight} onChange={handleFontWeightChange} className="equal-height">
-                    <option value="normal">Normal</option>
-                    <option value="bold">Gras</option>
-                    <option value="italic">Italique</option>
-                </select>
-
-                <label htmlFor="letterSpacing">Espacement des lettres:</label>
-                <input type="number" id="letterSpacing" value={letterSpacing} onChange={handleLetterSpacingChange} className="equal-height" />
-
-                <label htmlFor="logoWidth">Largeur du logo:</label>
-                <input type="number" id="logoWidth" value={logoWidth} onChange={handleLogoWidthChange} className="equal-height" />
-
-                    <label  htmlFor="logoHeight">Hauteur du logo:</label>
-                <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
-
-                <button onClick={generateLogo}>Générer le logo</button>
-                <button onClick={downloadImage}>Télécharger le logo</button>
-            </div>
-                <div className={`container2 ${logoShape}`} style={{ backgroundColor: backgroundColor, width: `${logoWidth}px`, height: `${logoHeight}px` }}>
-                    <div className="generated-logo" style={{ color: textColor }} dangerouslySetInnerHTML={{ __html: generatedLogo }}></div>
+                    <label htmlFor="fontSize">Taille de police:</label>
+                    <input type="number" id="fontSize" value={fontSize} onChange={handleFontSizeChange} className="equal-height" />
+                    <label htmlFor="fontWeight">Poids de la police:</label>
+                    <select id="fontWeight" value={fontWeight} onChange={handleFontWeightChange} className="equal-height">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Gras</option>
+                        <option value="italic">Italique</option>
+                    </select>
+                    <label htmlFor="letterSpacing">Espacement des lettres:</label>
+                    <input type="number" id="letterSpacing" value={letterSpacing} onChange={handleLetterSpacingChange} className="equal-height" ></input>
+                    <label htmlFor="logoWidth">Largeur du logo:</label>
+                    <input type="number" id="logoWidth" value={logoWidth} onChange={handleLogoWidthChange} className="equal-height" />
+                    <label htmlFor="logoHeight">Hauteur du logo:</label>
+                    <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
+                    <button onClick={downloadImage}>Télécharger le logo</button>
                 </div>
-            </div>
 
-            
+                <div className={`container2 ${logoShape}`} style={{ backgroundColor: backgroundColor, width: `${logoWidth}px`, height: `${logoHeight}px`, fontFamily: selectedFont, fontSize: `${fontSize}px`, fontWeight: fontWeight, letterSpacing: `${letterSpacing}px`, color: textColor }}>
+                    
+                   
+                </div>
+
+                
+            </div>
+      
+
+
         </>
     );
 };

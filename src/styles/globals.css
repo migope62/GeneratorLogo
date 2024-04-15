@@ -3,8 +3,7 @@
   --background-color: #0D141F;
   --link-color: rgba(255, 255, 255, 0.7);
   --container-color: rgba(255, 255, 255, 0.05);
-  --button-color: #003362;
-  --button-hover-color: #205D9E;
+  --button-color: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
   --button-text-color: rgba(255, 255, 255, 0.7);
   --text-color:rgba(255, 255, 255, 0.95);
   --h1-color: rgba(255, 255, 255, 0.9);

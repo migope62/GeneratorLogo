@@ -1,4 +1,6 @@
 import React from 'react';
+import { SketchPicker, ColorResult } from 'react-color';
+import '../styles/logoGenerator.css'
 
 interface CustomColorPickerProps {
     selectedColor: string;
@@ -6,19 +8,17 @@ interface CustomColorPickerProps {
 }
 
 const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, onColorChange }) => {
-    const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const color = event.target.value;
-        onColorChange(color);
+    const handleColorChange = (color: ColorResult) => {
+        onColorChange(color.hex);
     };
 
     return (
         <div className="custom-color-picker">
-            <label htmlFor="fontSelector">Choisir une couleur : </label>
-            <input 
-                type="color"
-                value={selectedColor}
+            <SketchPicker
+                color={selectedColor}
                 onChange={handleColorChange}
-                className="color-input"
+                width="50%"
+                height="100%"
             />
         </div>
     );

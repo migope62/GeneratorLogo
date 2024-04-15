@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 interface FontSelectorProps {
     selectedFont: string;
     onFontChange: (font: string) => void;
@@ -14,12 +15,12 @@ const FontSelector: React.FC<FontSelectorProps> = ({ selectedFont, onFontChange 
 
     return (
         <div>
-            <label htmlFor="fontSelector">Choisir une police : </label>
+            <label htmlFor="fontSelector">Choisir une police :</label >
             <select id="fontSelector" value={selectedFont} onChange={handleChange}>
                 {fonts.map(font => (
                     <option key={font} value={font}>{font}</option>
                 ))}
-            </select>
+                </select>
         </div>
     );
 };

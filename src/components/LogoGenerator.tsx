@@ -99,10 +99,10 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     // Fonction pour gérer le téléchargement du logo généré
     const downloadImage = () => {
         if (generatedLogo) {
-            const generatedLogoElement: HTMLElement | null = document.querySelector('.generated-logo');
+            const generatedLogoElement: HTMLElement | null = document.querySelector('.container2');
 
             if (generatedLogoElement) {
-                htmlToImage.toPng(generatedLogoElement, { width: 640, height: 448 })
+                htmlToImage.toPng(generatedLogoElement, { width: logoWidth, height: logoHeight })
                     .then(function (dataUrl) {
                         const link = document.createElement('a');
                         link.href = dataUrl;
@@ -116,10 +116,11 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                         console.error('Erreur lors de la conversion du logo en image PNG :', error);
                     });
             } else {
-                console.error('Impossible de trouver l\'élément .generated-logo dans le DOM.');
+                console.error('Impossible de trouver l\'élément .container2 dans le DOM.');
             }
         }
     };
+
 
 
     return (
@@ -156,15 +157,15 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                     <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
                     <button onClick={downloadImage}>Télécharger le logo</button>
                 </div>
+                <div className="mothercontainer2">
+                    <div className={`container2 ${logoShape}`} style={{ backgroundColor: backgroundColor, width: `${logoWidth}px`, height: `${logoHeight}px`, fontFamily: selectedFont, fontSize: `${fontSize}px`, fontWeight: fontWeight, letterSpacing: `${letterSpacing}px`, color: textColor }}>
+                    </div>
 
-                <div className={`container2 ${logoShape}`} style={{ backgroundColor: backgroundColor, width: `${logoWidth}px`, height: `${logoHeight}px`, fontFamily: selectedFont, fontSize: `${fontSize}px`, fontWeight: fontWeight, letterSpacing: `${letterSpacing}px`, color: textColor }}>
-                    
-                   
                 </div>
 
-                
+
             </div>
-      
+
 
 
         </>

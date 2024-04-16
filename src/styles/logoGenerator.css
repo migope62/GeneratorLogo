@@ -1,10 +1,12 @@
 .bigcontainer {
     display: flex;
     max-height: 100vh;
+    max-width: 100%;
 }
 
 .container {
     display: flex;
+    justify-content: space-around;
     flex-direction: column;
     max-width: 25%;
     height: 100vh;
@@ -15,16 +17,17 @@
 }
 
 label {
-    margin-bottom: 0.2rem;
     display: block;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     color: var(--text-color);
 }
-label:first-of-type{
+
+label:first-of-type {
     margin-top: 0.3rem;
 }
+
 .container input[type="text"],
 input[type="file"],
 select,
@@ -37,22 +40,21 @@ select,
 #logoWidth,
 #logoHeight,
 button {
-        background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
-        margin-bottom: 0.3rem;
-        border: 0;
-        border-radius: 8px;
-        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        font-family: Phantomsans, sans-serif;
-        font-size: 0.9rem;
-        max-width: 10rem;
-        padding:1rem 1.2rem;
-        text-decoration: none;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        cursor: pointer;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: var(--button-text-color);
+    font-family: Phantomsans, sans-serif;
+    font-size: 0.9rem;
+    max-width: 10rem;
+    padding: 0.5em 1.1rem;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    cursor: pointer;
 }
 
 .container input[type="text"]:hover,
@@ -72,14 +74,19 @@ select:hover,
     transform: scale(1.125);
 }
 
+.mothercontainer2 {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100vw;
+}
 
 .container2 {
-    margin: 0 auto;
-    height: 100vh;
-    max-width: 100%;
     border: 0.2rem solid var(--container-color);
     border-radius: 0.6rem;
 }
+
 .container2.rectangle {
     border-radius: 0.6rem;
 }
@@ -119,9 +126,19 @@ select:hover,
     max-height: 5rem;
 }
 
-@media (max-width: 1037px) {}
-
-
+@media (max-width: 968px) {
+.bigcontainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    max-width: 100%;
+    margin: 2rem 0 2rem 0;
+}
+.container {
+    max-width: 100%;
+    margin: 1rem 0 1rem 0;
+}
+}
 @media (max-width: 750px) {}
 
 

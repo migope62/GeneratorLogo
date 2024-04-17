@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import FontSelector from './FontSelector';
 import CustomColorPicker from './CustomColorPicker';
 import * as htmlToImage from 'html-to-image';
@@ -20,6 +20,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [logoWidth, setLogoWidth] = useState<number>(300);
     const [logoHeight, setLogoHeight] = useState<number>(300);
     const [logoShape, setLogoShape] = useState<string>('rectangle');
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // Fonction pour gérer le changement de couleur de fond sélectionnée
     const handleBackgroundColorChange = (color: string) => {
@@ -68,11 +69,11 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
         setLetterSpacing(Number(event.target.value));
     };
 
-
     // Fonction pour gérer le changement de forme du logo
     const handleLogoShapeChange = (shape: string) => {
         setLogoShape(shape);
     };
+
     // Fonction pour gérer le changement de largeur du logo
     const handleLogoWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLogoWidth(Number(event.target.value));
@@ -83,50 +84,39 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
         setLogoHeight(Number(event.target.value));
     };
 
-
     // Fonction pour générer le logo en fonction des choix de l'utilisateur
     const generateLogo = () => {
         const logoText = `<span style="color: ${textColor}; font-family: ${selectedFont}; font-size: ${fontSize}px; font-weight: ${fontWeight}; letter-spacing: ${letterSpacing}px;">${inputText}</span>`;
         const logoImage = image ? `<img src="${image}" alt="Logo" style="width: ${logoWidth}px; height: ${logoHeight}px;" />` : '';
-
         const logo = `${logoText} ${logoImage}`;
         setGeneratedLogo(logo);
         setImageURL(image);
-    };
-
-
-
-    // Fonction pour gérer le téléchargement du logo généré
-    const downloadImage = () => {
-        if (generatedLogo) {
-            const generatedLogoElement: HTMLElement | null = document.querySelector('.container2');
-
-            if (generatedLogoElement) {
-                htmlToImage.toPng(generatedLogoElement, { width: logoWidth, height: logoHeight })
-                    .then(function (dataUrl) {
-                        const link = document.createElement('a');
-                        link.href = dataUrl;
-                        link.download = 'logo.png';
-
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                    })
-                    .catch(function (error) {
-                        console.error('Erreur lors de la conversion du logo en image PNG :', error);
-                    });
-            } else {
-                console.error('Impossible de trouver l\'élément .container2 dans le DOM.');
-            }
+        if (containerRef.current) {
+            downloadImage(containerRef.current);
         }
     };
 
-
+    // Fonction pour gérer le téléchargement du logo généré
+    const downloadImage = (element: HTMLElement) => {
+        htmlToImage
+            .toPng(element, { width: logoWidth, height: logoHeight })
+            .then(function (dataUrl) {
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = 'logo.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(function (error) {
+                console.error('Erreur lors de la conversion du logo en image PNG :', error);
+            });
+    };
 
     return (
         <>
             <div className="bigcontainer">
-                <div className='container'>
+                <div className="container">
                     <CustomColorPicker selectedColor={backgroundColor} onColorChange={handleBackgroundColorChange} />
                     <label htmlFor="form">Choisissez une forme :</label>
                     <select id="form" value={logoShape} onChange={(e) => handleLogoShapeChange(e.target.value)}>
@@ -155,19 +145,26 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                     <input type="number" id="logoWidth" value={logoWidth} onChange={handleLogoWidthChange} className="equal-height" />
                     <label htmlFor="logoHeight">Hauteur du logo:</label>
                     <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
-                    <button onClick={downloadImage}>Télécharger le logo</button>
+                    <button onClick={generateLogo}>Télécharger le logo</button>
                 </div>
                 <div className="mothercontainer2">
-                    <div className={`container2 ${logoShape}`} style={{ backgroundColor: backgroundColor, width: `${logoWidth}px`, height: `${logoHeight}px`, fontFamily: selectedFont, fontSize: `${fontSize}px`, fontWeight: fontWeight, letterSpacing: `${letterSpacing}px`, color: textColor }}>
-                    </div>
-
+                    <div
+                        ref={containerRef}
+                        className={`container2 ${logoShape}`}
+                        style={{
+                            backgroundColor: backgroundColor,
+                            width: `${logoWidth}px`,
+                            height: `${logoHeight}px`,
+                            fontFamily: selectedFont,
+                            fontSize: `${fontSize}px`,
+                            fontWeight: fontWeight,
+                            letterSpacing: `${letterSpacing}px`,
+                            color: textColor,
+                        }}
+                    ></div>
+                    <div className="generated-logo" style={{ color: textColor }} dangerouslySetInnerHTML={{ __html: generatedLogo }}></div>
                 </div>
-
-
             </div>
-
-
-
         </>
     );
 };

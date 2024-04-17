@@ -18,7 +18,7 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
                 color={selectedColor}
                 onChange={handleColorChange}
                 width="50%"
-                height="100%"
+               
             />
         </div>
     );

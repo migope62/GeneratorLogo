@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/logoGenerator.css'
 
 
 interface FontSelectorProps {
@@ -15,8 +16,8 @@ const FontSelector: React.FC<FontSelectorProps> = ({ selectedFont, onFontChange 
 
     return (
         <div>
-            <label htmlFor="fontSelector">Choisir une police :</label >
-            <select id="fontSelector" value={selectedFont} onChange={handleChange}>
+            <label htmlFor="fontselector">Choisir une police :</label >
+            <select id="SelectorFont" value={selectedFont} onChange={handleChange}>
                 {fonts.map(font => (
                     <option key={font} value={font}>{font}</option>
                 ))}

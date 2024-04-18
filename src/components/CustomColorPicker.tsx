@@ -17,7 +17,7 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
             <SketchPicker
                 color={selectedColor}
                 onChange={handleColorChange}
-                width="50%"
+                
                
             />
         </div>

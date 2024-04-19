@@ -17,8 +17,15 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
             <SketchPicker
                 color={selectedColor}
                 onChange={handleColorChange}
-                
-               
+                styles={{
+                    default: {
+                        picker: {
+                            backgroundColor: '#0042c3', 
+                            border: 'none', 
+                            color: 'white', 
+                        },
+                    },
+                }}
             />
         </div>
     );

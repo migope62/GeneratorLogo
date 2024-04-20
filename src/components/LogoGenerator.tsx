@@ -17,8 +17,8 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [inputText, setInputText] = useState<string>('Votre texte ici');
     const [image, setImage] = useState<string>('');
     const [imageURL, setImageURL] = useState<string>('');
-    const [logoWidth, setLogoWidth] = useState<number>(300);
-    const [logoHeight, setLogoHeight] = useState<number>(300);
+    const [logoWidth, setLogoWidth] = useState<number>(0);
+    const [logoHeight, setLogoHeight] = useState<number>(0);
     const [logoShape, setLogoShape] = useState<string>('rectangle');
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -153,8 +153,8 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                         className={`container2 ${logoShape}`}
                         style={{
                             backgroundColor: backgroundColor,
-                            width: `${logoWidth}px`,
-                            height: `${logoHeight}px`,
+                            width: '500px',
+                            height: '300px',
                             fontFamily: selectedFont,
                             fontSize: `${fontSize}px`,
                             fontWeight: fontWeight,
@@ -162,7 +162,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                             color: textColor,
                         }}
                     ></div>
-                    <div className="generated-logo" style={{ color: textColor }} dangerouslySetInnerHTML={{ __html: generatedLogo }}></div>
+                   
                 </div>
             </div>
         </>

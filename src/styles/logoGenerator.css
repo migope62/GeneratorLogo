@@ -27,9 +27,8 @@ label:first-of-type {
     margin-top: 0.5rem;
 }
 
-#SelectorFont,
-input[type="file"]{
-    margin: 0 auto;
+#SelectorFont 
+{
     width: 100%;
 }
 
@@ -152,20 +151,18 @@ button:hover
     }
 
     .container {
+        margin: 0 auto;
         display: flex;
         justify-content: space-around;
         text-align: center;
-        margin: 0 auto;
         max-width: 100%;
-        margin-bottom: 5rem;
+        margin-bottom: 2rem;
     }
-
     label {
         margin-bottom: 0.15rem;
     }
 
-    .container input[type="text"],
-    input[type="file"],
+   
     select,
     #SelectorFont,
     #fontSize,
@@ -177,15 +174,13 @@ button:hover
     #logoWidth,
     #logoHeight,
     button {
-        margin: 0 auto;
         text-align: center;
         width: 15rem;
-        min-height: 3rem;
+        height: 3rem;
         margin-bottom: 1rem;
     }
 
     .custom-color-picker {
-        text-align: center;
         margin-bottom: 0.5rem;
         max-width: 100%;
         width: 10rem;

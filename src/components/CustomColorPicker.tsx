@@ -20,7 +20,7 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
                 styles={{
                     default: {
                         picker: {
-                            backgroundColor: '#0042c3', 
+                            backgroundImage: 'linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%)',
                             border: 'none', 
                             color: 'white', 
                         },

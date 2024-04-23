@@ -10,7 +10,6 @@
     flex-direction: column;
     text-align: center;
     max-width: 20%;
-    font-size: 0.6rem;
     padding: 1rem 0.5rem;
     height: auto;
 }
@@ -19,7 +18,7 @@ label {
     display: block;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 600;
+    font-size: 0.7rem;
     color: var(--text-color);
     margin-bottom: 0.1rem;
 }
@@ -28,10 +27,15 @@ label:first-of-type {
     margin-top: 0.5rem;
 }
 
+#SelectorFont,
+input[type="file"]{
+    margin: 0 auto;
+    width: 100%;
+}
+
 .container input[type="text"],
 input[type="file"],
 select,
-#SelectorFont,
 #fontSize,
 #fontWeight,
 #letterSpacing,
@@ -41,28 +45,23 @@ select,
 #logoWidth,
 #logoHeight,
 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    background-color: #000000;
-    border: 2px solid #1A1A1A;
-    border-radius: 15px;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Lato", sans-serif;
-    font-weight: 300;
-    font-style: italic;
-    font-weight:400;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-    padding: 0.25rem;
-    touch-action: manipulation;
+    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%);
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
     max-width: 15rem;
     height: 2rem;
+    font-size: 0.6rem;
 }
 
-#SelectorFont {
-    width: 100%;
-}
+
+
 button {
     margin-top: 0.5rem;
 }
@@ -78,9 +77,13 @@ select:hover,
 #form:hover,
 #logoWidth:hover,
 #logoHeight:hover,
-.color-input:hover {
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
+.color-input:hover,
+button:hover
+{
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .mothercontainer2 {
@@ -88,12 +91,14 @@ select:hover,
     display: flex;
     align-items: center;
     max-width: 100%;
-    max-height: 100vw;
+    max-height: 100%;
 }
 
 .container2 {
     border: 0.2rem solid var(--container-color);
     border-radius: 0.6rem;
+    width: 500px;
+    height: 300px;
 }
 
 .container2.rectangle {
@@ -140,6 +145,7 @@ select:hover,
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        text-align: center;
         max-width: 100%;
         margin-top: 1rem;
 
@@ -151,12 +157,13 @@ select:hover,
         text-align: center;
         margin: 0 auto;
         max-width: 100%;
-        max-height: 100%;
         margin-bottom: 5rem;
     }
-label {
-    margin-bottom: 0.15rem;
-}
+
+    label {
+        margin-bottom: 0.15rem;
+    }
+
     .container input[type="text"],
     input[type="file"],
     select,
@@ -169,22 +176,29 @@ label {
     #form,
     #logoWidth,
     #logoHeight,
-         button
-    {
+    button {
         margin: 0 auto;
+        text-align: center;
         width: 15rem;
         min-height: 3rem;
         margin-bottom: 1rem;
     }
 
     .custom-color-picker {
+        text-align: center;
         margin-bottom: 0.5rem;
         max-width: 100%;
         width: 10rem;
     }
+
 }
 
-@media (max-width: 750px) {}
+@media (max-width: 750px) {
+    .container2 {
+        height: 200px;
+        width: 300px;
+    }
+}
 
 
 @media (max-width: 320px) {}

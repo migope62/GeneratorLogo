@@ -14,13 +14,12 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [fontWeight, setFontWeight] = useState<string>('normal');
     const [letterSpacing, setLetterSpacing] = useState<number>(0);
     const [generatedLogo, setGeneratedLogo] = useState<string>('');
-    const [inputText, setInputText] = useState<string>('Votre texte ici');
     const [image, setImage] = useState<string>('');
     const [imageURL, setImageURL] = useState<string>('');
     const [logoWidth, setLogoWidth] = useState<number>(0);
     const [logoHeight, setLogoHeight] = useState<number>(0);
     const [logoShape, setLogoShape] = useState<string>('rectangle');
-    const containerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null)
 
     // Fonction pour gérer le changement de couleur de fond sélectionnée
     const handleBackgroundColorChange = (color: string) => {
@@ -35,11 +34,6 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     // Fonction pour gérer le changement de police de caractères sélectionnée
     const handleFontChange = (font: string) => {
         setSelectedFont(font);
-    };
-
-    // Fonction pour gérer le changement de texte saisi par l'utilisateur
-    const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputText(event.target.value);
     };
 
     // Fonction pour gérer le changement de l'image importée
@@ -83,23 +77,27 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const handleLogoHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLogoHeight(Number(event.target.value));
     };
-
-    // Fonction pour générer le logo en fonction des choix de l'utilisateur
     const generateLogo = () => {
-        const logoText = `<span style="color: ${textColor}; font-family: ${selectedFont}; font-size: ${fontSize}px; font-weight: ${fontWeight}; letter-spacing: ${letterSpacing}px;">${inputText}</span>`;
-        const logoImage = image ? `<img src="${image}" alt="Logo" style="width: ${logoWidth}px; height: ${logoHeight}px;" />` : '';
+        const logoText = `<span style="color: ${textColor}; font-family: ${selectedFont}; font-size: ${fontSize}px; font-weight: ${fontWeight}; letter-spacing: ${letterSpacing}px;">`;
+        const logoImage = image ? `<img src="${image}" alt="Logo" style="max-width: 100%; max-height: 100%;" />` : '';
         const logo = `${logoText} ${logoImage}`;
         setGeneratedLogo(logo);
         setImageURL(image);
+
+        // Vérifiez si containerRef.current est défini avant de télécharger l'image
         if (containerRef.current) {
-            downloadImage(containerRef.current);
+            const width = logoWidth;
+            const height = logoHeight;
+            downloadImage(containerRef.current, width, height);
+        } else {
+            console.error("containerRef.current is null");
         }
     };
 
-    // Fonction pour gérer le téléchargement du logo généré
-    const downloadImage = (element: HTMLElement) => {
+    // Modifiez la fonction downloadImage() pour accepter un élément de type HTMLElement
+    const downloadImage = (element: HTMLElement, width: number, height: number) => {
         htmlToImage
-            .toPng(element, { width: logoWidth, height: logoHeight })
+            .toPng(element, { width: width, height: height })
             .then(function (dataUrl) {
                 const link = document.createElement('a');
                 link.href = dataUrl;
@@ -153,13 +151,13 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                         className={`container2 ${logoShape}`}
                         style={{
                             backgroundColor: backgroundColor,
-                            width: '500px',
-                            height: '300px',
+
                             fontFamily: selectedFont,
                             fontSize: `${fontSize}px`,
                             fontWeight: fontWeight,
                             letterSpacing: `${letterSpacing}px`,
                             color: textColor,
+                            
                         }}
                     ></div>
                    

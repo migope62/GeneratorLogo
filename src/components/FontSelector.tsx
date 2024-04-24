@@ -15,6 +15,7 @@ const FontSelector: React.FC<FontSelectorProps> = ({ selectedFont, onFontChange 
     };
 
     return (
+        <>
         <div>
             <label htmlFor="fontselector">Choisir une police :</label >
             <select id="SelectorFont" value={selectedFont} onChange={handleChange}>
@@ -22,7 +23,7 @@ const FontSelector: React.FC<FontSelectorProps> = ({ selectedFont, onFontChange 
                     <option key={font} value={font}>{font}</option>
                 ))}
                 </select>
-        </div>
+            </div></>
     );
 };
 

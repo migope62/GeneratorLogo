@@ -2,10 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 :root {
-  --link-color: rgba(255, 255, 255, 0.7);
-  --container-color: rgba(255, 255, 255, 0.05);
   --text-color: rgba(255, 255, 255, 0.95);
-  --h1-color: rgba(255, 255, 255, 0.9);
 }
 
 * {
@@ -17,7 +14,6 @@
 html,
 body {
   background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%);
-  background-repeat: no-repeat;
   width: 100%;
   height: 100vh;
 }

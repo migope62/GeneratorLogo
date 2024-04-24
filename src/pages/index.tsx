@@ -5,9 +5,9 @@ import "../styles/logoGenerator.css";
 
 const HomePage: React.FC = () => {
     return (
-        <div>
-            <LogoGenerator />
-        </div>
+<>
+        <LogoGenerator />
+        </>
     );
 };
 

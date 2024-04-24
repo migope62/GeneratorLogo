@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import FontSelector from './FontSelector';
 import CustomColorPicker from './CustomColorPicker';
 import * as htmlToImage from 'html-to-image';
@@ -19,11 +19,26 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [logoWidth, setLogoWidth] = useState<number>(0);
     const [logoHeight, setLogoHeight] = useState<number>(0);
     const [logoShape, setLogoShape] = useState<string>('rectangle');
-    const containerRef = useRef<HTMLDivElement>(null)
+    const [containerReady, setContainerReady] = useState(false);
+    const [customText, setCustomText] = useState<string>('texte'); // Ajout de l'état pour le texte personnalisé
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // useEffect pour mettre à jour l'état containerReady lorsque l'élément référencé est rendu
+    useEffect(() => {
+        if (containerRef.current) {
+            setContainerReady(true);
+        }
+    }, []);
 
     // Fonction pour gérer le changement de couleur de fond sélectionnée
     const handleBackgroundColorChange = (color: string) => {
         setBackgroundColor(color);
+    };
+  
+
+    // Fonction pour gérer le changement du texte personnalisé
+    const handleCustomTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCustomText(event.target.value);
     };
 
     // Fonction pour gérer le changement de couleur de texte sélectionnée
@@ -77,20 +92,27 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const handleLogoHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLogoHeight(Number(event.target.value));
     };
-    const generateLogo = () => {
-        const logoText = `<span style="color: ${textColor}; font-family: ${selectedFont}; font-size: ${fontSize}px; font-weight: ${fontWeight}; letter-spacing: ${letterSpacing}px;">`;
-        const logoImage = image ? `<img src="${image}" alt="Logo" style="max-width: 100%; max-height: 100%;" />` : '';
-        const logo = `${logoText} ${logoImage}`;
-        setGeneratedLogo(logo);
-        setImageURL(image);
 
-        // Vérifiez si containerRef.current est défini avant de télécharger l'image
-        if (containerRef.current) {
-            const width = logoWidth;
-            const height = logoHeight;
-            downloadImage(containerRef.current, width, height);
+    
+
+    // La fonction generateLogo utilise containerReady pour vérifier si l'élément référencé est prêt
+    const generateLogo = () => {
+        if (containerReady) {
+            const logoText = `<span style="color: ${textColor}; font-family: ${selectedFont}; font-size: ${fontSize}px; font-weight: ${fontWeight}; letter-spacing: ${letterSpacing}px;">${customText}</span>`; // Utilisation du texte personnalisé
+            const logoImage = image ? `<img src="${image}" alt="Logo" style="max-width: 100%; max-height: 100%;" />` : '';
+            const logo = `${logoText} ${logoImage}`;
+            setGeneratedLogo(logo);
+            setImageURL(image);
+
+            if (containerRef.current) {
+                const width = logoWidth;
+                const height = logoHeight;
+                downloadImage(containerRef.current, width, height);
+            } else {
+                console.error("containerRef.current is null");
+            }
         } else {
-            console.error("containerRef.current is null");
+            console.error("Container is not ready yet");
         }
     };
 
@@ -125,10 +147,16 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                         <option value="hexagone">Hexagone</option>
                         <option value="etoile">Etoile</option>
                     </select>
-                    <label htmlFor="img">Importez une image:</label>
-                    <input id="img" type="file" accept="image/*" onChange={handleImageChange} className="equal-height" />
+                    <button onClick={() => {
+                        const inputElement = document.getElementById('img');
+                        if (inputElement) {
+                            inputElement.click();
+                        }
+                    }}>Choisir un fichier</button>
+                    <input id="img" type="file" accept="image/*" onChange={handleImageChange} className="equal-height" style={{ display: 'none' }} />
+                    <label htmlFor="customText">Texte personnalisé:</label>
+                    <input type="text" id="customText" value={customText} onChange={handleCustomTextChange} className="equal-height" />
                     <FontSelector selectedFont={selectedFont} onFontChange={handleFontChange} />
-
                     <label htmlFor="fontSize">Taille de police:</label>
                     <input type="number" id="fontSize" value={fontSize} onChange={handleFontSizeChange} className="equal-height" />
                     <label htmlFor="fontWeight">Poids de la police:</label>
@@ -138,11 +166,12 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                         <option value="italic">Italique</option>
                     </select>
                     <label htmlFor="letterSpacing">Espacement des lettres:</label>
-                    <input type="number" id="letterSpacing" value={letterSpacing} onChange={handleLetterSpacingChange} className="equal-height" ></input>
+                    <input type="number" id="letterSpacing" value={letterSpacing} onChange={handleLetterSpacingChange} className="equal-height" />
                     <label htmlFor="logoWidth">Largeur du logo:</label>
                     <input type="number" id="logoWidth" value={logoWidth} onChange={handleLogoWidthChange} className="equal-height" />
                     <label htmlFor="logoHeight">Hauteur du logo:</label>
                     <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
+                    
                     <button onClick={generateLogo}>Télécharger le logo</button>
                 </div>
                 <div className="mothercontainer2">
@@ -157,10 +186,10 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                             fontWeight: fontWeight,
                             letterSpacing: `${letterSpacing}px`,
                             color: textColor,
-                            
+
                         }}
                     ></div>
-                   
+
                 </div>
             </div>
         </>

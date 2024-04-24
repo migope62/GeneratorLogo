@@ -16,35 +16,23 @@
     height: auto;
 }
 
-label {
-    display: block;
+.container label {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-size: 0.7rem;
     color: var(--text-color);
-    margin-bottom: 0.1rem;
-}
-
-label:first-of-type {
-    margin-top: 0.5rem;
 }
 
 #SelectorFont {
     width: 100%;
 }
-
-.container input[type="text"],
-input[type="file"],
-select,
-#fontSize,
-#fontWeight,
-#letterSpacing,
-#img,
-#text,
-#form,
-#logoWidth,
-#logoHeight,
-button {
+.container input:first-of-type {
+    height: 12px;
+    max-width: 5rem;
+}
+.container input,
+.container select,
+.container button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,23 +50,13 @@ button {
 
 
 
-button {
+.container button {
     margin-top: 0.5rem;
 }
 
-.container input[type="text"]:hover,
-input[type="file"]:hover,
-select:hover,
-#fontSize:hover,
-#fontWeight:hover,
-#letterSpacing:hover,
-#img:hover,
-#text:hover,
-#form:hover,
-#logoWidth:hover,
-#logoHeight:hover,
-.color-input:hover,
-button:hover {
+.container input:hover,
+.container select:hover,
+.container button:hover {
     background-position: right center;
     color: black;
     text-decoration: none;
@@ -154,9 +132,7 @@ button:hover {
         margin-bottom: 2rem;
     }
 
-    .container * {
-        text-align: center;
-    }
+    
 
     label {
         margin-bottom: 0.15rem;

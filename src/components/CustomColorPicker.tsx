@@ -1,6 +1,5 @@
 import React from 'react';
 import { SketchPicker, ColorResult } from 'react-color';
-import '../styles/logoGenerator.css'
 
 interface CustomColorPickerProps {
     selectedColor: string;
@@ -13,6 +12,7 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
     };
 
     return (
+        <>
         <div className="custom-color-picker">
             <SketchPicker
                 color={selectedColor}
@@ -27,7 +27,7 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
                     },
                 }}
             />
-        </div>
+            </div></>
     );
 };
 

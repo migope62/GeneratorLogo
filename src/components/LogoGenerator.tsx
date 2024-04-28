@@ -20,7 +20,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [logoHeight, setLogoHeight] = useState<number>(0);
     const [logoShape, setLogoShape] = useState<string>('rectangle');
     const [containerReady, setContainerReady] = useState(false);
-    const [customText, setCustomText] = useState<string>('texte'); // Ajout de l'état pour le texte personnalisé
+    const [customText, setCustomText] = useState<string>('Ecrire ici'); // Ajout de l'état pour le texte personnalisé
     const containerRef = useRef<HTMLDivElement>(null);
 
     // useEffect pour mettre à jour l'état containerReady lorsque l'élément référencé est rendu

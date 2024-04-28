@@ -26,10 +26,12 @@
 #SelectorFont {
     width: 100%;
 }
+
 .container input:first-of-type {
     height: 12px;
     max-width: 5rem;
 }
+
 .container input,
 .container select,
 .container button {
@@ -132,24 +134,20 @@
         margin-bottom: 2rem;
     }
 
-    
 
-    label {
-        margin-bottom: 0.15rem;
+
+    .container label {
+        margin-bottom: 0.30rem;
     }
 
 
-    select,
-    #SelectorFont,
-    #fontSize,
-    #fontWeight,
-    #letterSpacing,
-    #img,
-    #text,
-    #form,
-    #logoWidth,
-    #logoHeight,
-    button {
+    .container input,
+    .container select,
+    .container button,
+    .container #number,
+    .container #text
+    {
+        margin: 0 auto;
         text-align: center;
         width: 15rem;
         height: 3rem;

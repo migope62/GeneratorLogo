@@ -21,6 +21,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const [logoShape, setLogoShape] = useState<string>('rectangle');
     const [containerReady, setContainerReady] = useState(false);
     const [customText, setCustomText] = useState<string>('Ecrire ici'); // Ajout de l'état pour le texte personnalisé
+    const [textPosition, setTextPosition] = useState<{ x: number; y: number } | null>(null); // État pour suivre la position du texte
     const containerRef = useRef<HTMLDivElement>(null);
 
     // useEffect pour mettre à jour l'état containerReady lorsque l'élément référencé est rendu
@@ -34,7 +35,6 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
     const handleBackgroundColorChange = (color: string) => {
         setBackgroundColor(color);
     };
-  
 
     // Fonction pour gérer le changement du texte personnalisé
     const handleCustomTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +93,67 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
         setLogoHeight(Number(event.target.value));
     };
 
-    
+    const handleTextDrag = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (textPosition && containerRef.current) {
+            const containerRect = containerRef.current.getBoundingClientRect();
+            const textWidth = customText.length * fontSize;
+            const textHeight = fontSize;
+
+            // Calculer les nouvelles positions en fonction des limites du conteneur
+            const newX = Math.max(containerRect.left, Math.min(containerRect.right - textWidth, textPosition.x + event.movementX));
+            const newY = Math.max(containerRect.top, Math.min(containerRect.bottom - textHeight, textPosition.y + event.movementY));
+
+            setTextPosition({ x: newX, y: newY });
+        }
+    };
+
+    const handleTextMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (containerRef.current) {
+            const containerRect = containerRef.current.getBoundingClientRect();
+            const offsetX = event.clientX - containerRect.left;
+            const offsetY = event.clientY - containerRect.top;
+
+            // Vérifier si la position du texte est à l'intérieur du conteneur
+            if (offsetX >= 0 && offsetX <= containerRect.width && offsetY >= 0 && offsetY <= containerRect.height) {
+                setTextPosition({ x: offsetX, y: offsetY });
+            }
+
+
+            // Enregistrer la position initiale du texte et de la souris
+            const initialTextPosition = textPosition;
+            const initialMousePosition = { x: event.clientX, y: event.clientY };
+
+            const handleMouseMove = (event: MouseEvent) => {
+                // Calculer la différence entre la position initiale de la souris et la nouvelle position
+                const deltaX = event.clientX - initialMousePosition.x;
+                const deltaY = event.clientY - initialMousePosition.y;
+
+                // Mettre à jour la position du texte en fonction de cette différence
+                if (initialTextPosition) {
+                    // Calculer les nouvelles positions en fonction des limites du conteneur
+                    const newX = Math.max(0, Math.min(containerRect.width - customText.length * fontSize, initialTextPosition.x + deltaX));
+                    const newY = Math.max(0, Math.min(containerRect.height - fontSize, initialTextPosition.y + deltaY));
+
+                    setTextPosition({
+                        x: newX,
+                        y: newY
+                    });
+                }
+            };
+
+            const handleMouseUp = () => {
+                // Retirer les gestionnaires d'événements une fois le déplacement terminé
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+            };
+
+            // Ajouter des gestionnaires d'événements pour suivre le mouvement de la souris
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+    };
+
+
 
     // La fonction generateLogo utilise containerReady pour vérifier si l'élément référencé est prêt
     const generateLogo = () => {
@@ -171,7 +231,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                     <input type="number" id="logoWidth" value={logoWidth} onChange={handleLogoWidthChange} className="equal-height" />
                     <label htmlFor="logoHeight">Hauteur du logo:</label>
                     <input type="number" id="logoHeight" value={logoHeight} onChange={handleLogoHeightChange} className="equal-height" />
-                    
+
                     <button onClick={generateLogo}>Télécharger le logo</button>
                 </div>
                 <div className="mothercontainer2">
@@ -186,10 +246,27 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
                             fontWeight: fontWeight,
                             letterSpacing: `${letterSpacing}px`,
                             color: textColor,
-
+                            position: 'relative' // Ajout de position relative pour que le texte puisse être déplacé
                         }}
-                    ></div>
+                    >
+                        {customText && ( // Afficher le texte uniquement s'il est défini
+                            <div
+                                onMouseDown={handleTextMouseDown}
+                                style={{
+                                    position: 'absolute',
+                                    top: textPosition ? textPosition.y : 130,
+                                    left: textPosition ? textPosition.x : 200,
+                                    cursor: 'move'
+                                }}
+                            >
+                                {customText}
+                            </div>
 
+
+
+
+                        )}
+                    </div>
                 </div>
             </div>
         </>

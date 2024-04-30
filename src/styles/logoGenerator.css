@@ -114,7 +114,6 @@
 
     .container {
         display: flex;
-        justify-content: space-between;
         margin: 0 auto;
         max-width: 100%;
         margin-bottom: 2rem;

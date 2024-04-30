@@ -1,5 +1,6 @@
 import React from 'react';
 import { SketchPicker, ColorResult } from 'react-color';
+import '../styles/logoGenerator.css'
 
 interface CustomColorPickerProps {
     selectedColor: string;
@@ -20,8 +21,7 @@ const CustomColorPicker: React.FC<CustomColorPickerProps> = ({ selectedColor, on
                 styles={{
                     default: {
                         picker: {
-                            backgroundImage: 'linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%)',
-                            border: 'none', 
+                            backgroundImage: 'linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%)', 
                             color: 'white', 
                         },
                     },

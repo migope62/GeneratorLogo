@@ -18,17 +18,11 @@ body {
   height: 100vh;
 }
 
-h1 {
-  color: var(--h1-color);
-}
 
-a {
-  color: var(--link-color);
-  text-decoration: none;
-}
+
 
 @media (max-width: 968px) {
   body {
-    height: 200vh;
+    height: 300vh;
   }
 }
